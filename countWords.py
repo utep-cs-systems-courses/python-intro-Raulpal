@@ -26,8 +26,9 @@ fdReader = os.open(declarationFileName, os.O_RDONLY)
 
 # (Get file to read, get the files total byte size) and store file contents.
 declarationStorage = os.read(fdReader, os.path.getsize(declarationFileName))
+
 # Separate the file text with space, period, comma, colon, semi-comma, and --
-separator = (r'\s|,\s|\.|\;|\:|\--').encode()
+separator = (r'\s|,\s|\.|\;|\:|\--|\-').encode()
 # Store the words again
 declarationStorage = re.split(separator, declarationStorage)
 #  Create dictionary
