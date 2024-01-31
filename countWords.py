@@ -3,6 +3,7 @@
 from sys import argv
 import os, stat
 from collections import defaultdict
+import re
 
 # Get command-line input --> file to read.
 declarationFileName = argv[1]
@@ -24,8 +25,11 @@ fdReader = os.open(declarationFileName, os.O_RDONLY)
 
 
 # (Get file to read, get the files total byte size) and store file contents.
-declarationStorage = os.read(fdReader, os.path.getsize(declarationFileName)).split()
-
+declarationStorage = os.read(fdReader, os.path.getsize(declarationFileName))
+# Separate the file text with space, period, comma, colon, semi-comma, and --
+separator = (r'\s|,\s|\.|\;|\:|\--').encode()
+# Store the words again
+declarationStorage = re.split(separator, declarationStorage)
 #  Create dictionary
 outputDictionary = defaultdict(int)
 
@@ -35,9 +39,8 @@ for key in declarationStorage:
 
 # Sort the words in ascending order in a tuple.
 outputDictionary = sorted(outputDictionary.items())
-
-# list ot store outputDictionary.
-sortedOutput = []
+# Slice the first element.
+outputDictionary = outputDictionary[1::]
 
 #  Get the tuple of (word, value) and combine it to one string and write to output file.
 for word,value in outputDictionary:
