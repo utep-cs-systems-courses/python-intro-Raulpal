@@ -6,7 +6,7 @@ import os         # checking if file exists
 import subprocess # executing program
 
 # set input and output files
-if len(sys.argv) is not 4:
+if len(sys.argv) != 4:
     print("Correct usage: wordCountTest.py <input text file> <output file> <solution key file>")
     exit()
 
@@ -15,7 +15,7 @@ outputFname = sys.argv[2]
 inputFname = sys.argv[3]
 
 #first check to make sure program exists
-if not os.path.exists("wordCount.py"):
+if not os.path.exists("countWords.py"):
     print ("wordCount.py doesn't exist! Exiting")
     exit()
 
@@ -25,7 +25,7 @@ if not os.path.exists(textFname):
     exit()
     
 #execute the program with 
-subprocess.call(["python3", "./wordCount.py", textFname, outputFname])
+subprocess.call(["python3", "./countWords.py", textFname, outputFname])
 
 #make sure output file exists
 if not os.path.exists(outputFname):
